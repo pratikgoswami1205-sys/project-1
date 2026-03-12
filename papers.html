@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previous Papers | HelperHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>HelperHub</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="ai-tools.html">AI Tools</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="papers.html" class="active">Previous Papers</a></li>
+            <li><a href="planner.html">Study Planner</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </nav>
+
+    <section style="padding: 10rem 6% 5rem;">
+        <div class="section-header">
+            <h2>Previous Year Papers</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Practice makes perfect. Access archives of past examinations.</p>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 4rem; flex-wrap: wrap;">
+            <button class="glass-tab active" onclick="filterResources('all')">All Years</button>
+            <button class="glass-tab" onclick="filterResources('2025')">2025</button>
+            <button class="glass-tab" onclick="filterResources('2024')">2024</button>
+            <button class="glass-tab" onclick="filterResources('2023')">2023</button>
+            <button class="glass-tab" onclick="filterResources('2022')">2022</button>
+        </div>
+
+        <div class="grid-layout" id="resources-grid">
+            <div class="modern-card" data-category="2025">
+                <div class="modern-card-icon"><i class="fas fa-file-pdf"></i></div>
+                <h3>Computer Networks 2025</h3>
+                <p>End-semester examination paper with detailed solutions and marking schemes.</p>
+                <button class="btn-primary" style="margin-top: 2rem; width: 100%;" onclick="alert('Downloading Paper 2025...')">Download Archive</button>
+            </div>
+
+            <div class="modern-card" data-category="2024">
+                <div class="modern-card-icon"><i class="fas fa-file-pdf"></i></div>
+                <h3>Operating Systems 2024</h3>
+                <p>Comprehensive collection of Mid-term and End-term question banks.</p>
+                <button class="btn-primary" style="margin-top: 2rem; width: 100%;" onclick="alert('Downloading Paper 2024...')">Download Archive</button>
+            </div>
+
+            <div class="modern-card" data-category="2023">
+                <div class="modern-card-icon"><i class="fas fa-file-pdf"></i></div>
+                <h3>Software Engineering 2023</h3>
+                <p>Includes previous year projects, case studies, and unit test question papers.</p>
+                <button class="btn-primary" style="margin-top: 2rem; width: 100%;" onclick="alert('Downloading Paper 2023...')">Download Archive</button>
+            </div>
+
+            <div class="modern-card" data-category="2022">
+                <div class="modern-card-icon"><i class="fas fa-file-pdf"></i></div>
+                <h3>Discrete Math 2022</h3>
+                <p>Highly requested paper featuring step-by-step proofs and detailed diagrams.</p>
+                <button class="btn-primary" style="margin-top: 2rem; width: 100%;" onclick="alert('Downloading Paper 2022...')">Download Archive</button>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 6rem 6%; text-align: center; border-top: 1px solid var(--glass-border); background: var(--bg-card); backdrop-filter: blur(10px);">
+        <p style="color: var(--text-muted);">&copy; 2026 HelperHub. Designed for the students of the future.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/resources.js"></script>
+</body>
+</html>

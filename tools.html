@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools | HelperHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>HelperHub</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tools.html" class="active">Tools</a></li>
+            <li><a href="ai-tools.html">AI Tools</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="papers.html">Previous Papers</a></li>
+            <li><a href="planner.html">Study Planner</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </nav>
+
+    <section style="padding: 10rem 6% 5rem;">
+        <div class="section-header">
+            <h2>Productivity Tools</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Empowering your studies with precision and elegance.</p>
+        </div>
+
+        <div class="grid-layout">
+            <div class="modern-card" onclick="openModal('modal-cgpa')">
+                <div class="modern-card-icon"><i class="fas fa-calculator"></i></div>
+                <h3>CGPA Calculator</h3>
+                <p>Dynamically calculate your CGPA based on grades and credits with real-time updates.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-percentage')">
+                <div class="modern-card-icon"><i class="fas fa-percent"></i></div>
+                <h3>Percentage Calc</h3>
+                <p>Convert your marks to percentage instantly as you type with a sleek feedback UI.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-word')">
+                <div class="modern-card-icon"><i class="fas fa-font"></i></div>
+                <h3>Word Counter</h3>
+                <p>Real-time word and character counting for your essays and assignments.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-timer')">
+                <div class="modern-card-icon"><i class="fas fa-clock"></i></div>
+                <h3>Study Timer</h3>
+                <p>Focus more with our customizable Pomodoro timer interface and smooth transitions.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-unit')">
+                <div class="modern-card-icon"><i class="fas fa-ruler-combined"></i></div>
+                <h3>Unit Converter</h3>
+                <p>Quickly convert between different units of length, weight, and temperature.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-age')">
+                <div class="modern-card-icon"><i class="fas fa-birthday-cake"></i></div>
+                <h3>Age Calculator</h3>
+                <p>Calculate your exact age in years, months, and days with a single click.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-case')">
+                <div class="modern-card-icon"><i class="fas fa-text-height"></i></div>
+                <h3>Text Case</h3>
+                <p>Convert your text to UPPERCASE, lowercase, Sentence case, or Title Case.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-char')">
+                <div class="modern-card-icon"><i class="fas fa-paragraph"></i></div>
+                <h3>Char Counter</h3>
+                <p>Detailed breakdown of characters, spaces, and lines in your text.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-todo')">
+                <div class="modern-card-icon"><i class="fas fa-list-check"></i></div>
+                <h3>To-Do List</h3>
+                <p>Keep track of your daily tasks and assignments with a simple, effective list.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-password')">
+                <div class="modern-card-icon"><i class="fas fa-key"></i></div>
+                <h3>Password Gen</h3>
+                <p>Generate secure, random passwords to keep your student accounts safe.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="modal-cgpa" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem; letter-spacing: -1px;">CGPA Calculator</h2>
+            <div class="cgpa-calculator">
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                    <input type="text" placeholder="Subject Name" class="subject-name">
+                    <input type="number" placeholder="G.P." class="grade-points" step="0.1">
+                    <input type="number" placeholder="Credits" class="credits">
+                </div>
+                <button onclick="addSubject()" class="btn-primary" style="width: 100%; margin-bottom: 2rem; padding: 1rem;">Add Subject</button>
+                <div id="subjects-list" style="max-height: 250px; overflow-y: auto; margin-bottom: 2rem; padding-right: 0.5rem;"></div>
+                <div class="glass" style="padding: 2rem; text-align: center; border-radius: 20px; border-color: var(--primary-light);">
+                    <span style="display: block; font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Current CGPA</span>
+                    <span id="cgpa-result" style="font-size: 3.5rem; font-weight: 900; color: var(--primary); font-variant-numeric: tabular-nums;">0.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-percentage" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem; letter-spacing: -1px;">Percentage Calculator</h2>
+            <div class="percentage-calculator">
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.9rem; color: var(--text-muted);">Obtained Marks</label>
+                    <input type="number" id="obtained-marks" placeholder="0">
+                </div>
+                <div style="margin-bottom: 2rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.9rem; color: var(--text-muted);">Total Marks</label>
+                    <input type="number" id="total-marks" placeholder="100">
+                </div>
+                <div class="glass" style="padding: 2.5rem; text-align: center; border-radius: 24px; border-color: var(--primary-light);">
+                    <span style="display: block; font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Calculated Result</span>
+                    <span id="percentage-result" style="font-size: 4rem; font-weight: 900; color: var(--primary); font-variant-numeric: tabular-nums;">0.00%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-word" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem; letter-spacing: -1px;">Word Counter</h2>
+            <textarea id="text-input" placeholder="Paste or type your text here..." style="height: 250px; resize: none; margin-bottom: 2rem;"></textarea>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                <div class="glass" style="padding: 1.5rem; text-align: center; border-radius: 18px;">
+                    <span style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.3rem;">Total Words</span>
+                    <span id="word-count" style="font-size: 2rem; font-weight: 800; color: var(--primary);">0</span>
+                </div>
+                <div class="glass" style="padding: 1.5rem; text-align: center; border-radius: 18px;">
+                    <span style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.3rem;">Characters</span>
+                    <span id="char-count" style="font-size: 2rem; font-weight: 800; color: var(--primary);">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-timer" class="modal-overlay">
+        <div class="modal-content-futuristic" style="text-align: center;">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2.5rem; letter-spacing: -1px;">Study Timer</h2>
+            <div class="glass" style="padding: 4rem 2rem; text-align: center; border-radius: 40px; margin-bottom: 3rem; border-width: 2px;">
+                <span id="timer-display" style="font-size: 6rem; font-weight: 900; color: var(--text-main); font-variant-numeric: tabular-nums; letter-spacing: -2px;">25:00</span>
+            </div>
+            <div style="display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;">
+                <button onclick="startTimer()" class="btn-primary" style="min-width: 140px;">Start Session</button>
+                <button onclick="pauseTimer()" class="btn-primary" style="min-width: 140px; background: var(--bg-card); border: 1px solid var(--glass-border); color: var(--text-main); box-shadow: none;">Pause</button>
+                <button onclick="resetTimer()" class="btn-primary" style="min-width: 140px; background: transparent; border: 1px solid #ff4757; color: #ff4757; box-shadow: none;">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-unit" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem; letter-spacing: -1px;">Unit Converter</h2>
+            <div style="margin-bottom: 1.5rem;">
+                <input type="number" id="unit-input" placeholder="Enter value">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                    <select id="unit-from">
+                        <option value="km">Kilometers</option>
+                        <option value="m">Meters</option>
+                        <option value="cm">Centimeters</option>
+                    </select>
+                    <select id="unit-to">
+                        <option value="m">Meters</option>
+                        <option value="km">Kilometers</option>
+                        <option value="cm">Centimeters</option>
+                    </select>
+                </div>
+            </div>
+            <button onclick="convertUnits()" class="btn-primary" style="width: 100%; margin-bottom: 2rem;">Convert</button>
+            <div class="glass" style="padding: 2rem; text-align: center; border-radius: 20px;">
+                <span id="unit-result" style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">0</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-age" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem; letter-spacing: -1px;">Age Calculator</h2>
+            <input type="date" id="birth-date" style="margin-bottom: 1.5rem;">
+            <button onclick="calculateAge()" class="btn-primary" style="width: 100%; margin-bottom: 2rem;">Calculate Age</button>
+            <div class="glass" style="padding: 2rem; text-align: center; border-radius: 20px;">
+                <span id="age-result" style="font-size: 2rem; font-weight: 800; color: var(--primary);">Enter birth date</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-case" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem; letter-spacing: -1px;">Text Case Converter</h2>
+            <textarea id="case-input" style="height: 150px; margin-bottom: 1.5rem;" placeholder="Paste text here..."></textarea>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <button onclick="convertCase('upper')" class="glass-tab">UPPERCASE</button>
+                <button onclick="convertCase('lower')" class="glass-tab">lowercase</button>
+                <button onclick="convertCase('title')" class="glass-tab">Title Case</button>
+                <button onclick="convertCase('sentence')" class="glass-tab">Sentence case</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-char" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem; letter-spacing: -1px;">Character Counter</h2>
+            <textarea id="char-input" style="height: 150px; margin-bottom: 1.5rem;" placeholder="Paste text here..."></textarea>
+            <div id="char-details" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="glass" style="padding: 1rem; text-align: center;">Chars: <span id="chars-total">0</span></div>
+                <div class="glass" style="padding: 1rem; text-align: center;">Spaces: <span id="chars-spaces">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-todo" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem; letter-spacing: -1px;">To-Do List</h2>
+            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                <input type="text" id="todo-input" placeholder="Add a task..." style="margin-bottom: 0;">
+                <button onclick="addTodo()" class="btn-primary" style="padding: 1rem 1.5rem;"><i class="fas fa-plus"></i></button>
+            </div>
+            <div id="todo-list" style="max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </div>
+
+    <div id="modal-password" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem; letter-spacing: -1px;">Password Generator</h2>
+            <input type="number" id="pass-length" value="12" min="4" max="50" style="margin-bottom: 1.5rem;">
+            <button onclick="generatePassword()" class="btn-primary" style="width: 100%; margin-bottom: 2rem;">Generate</button>
+            <div class="glass" style="padding: 1.5rem; text-align: center; border-radius: 16px; position: relative;">
+                <span id="pass-result" style="font-family: monospace; font-size: 1.2rem; word-break: break-all;">********</span>
+                <i class="fas fa-copy" onclick="copyPassword()" style="position: absolute; right: 1rem; top: 1.2rem; cursor: pointer; color: var(--text-muted);"></i>
+            </div>
+        </div>
+    </div>
+
+    <footer style="padding: 6rem 6%; text-align: center; border-top: 1px solid var(--glass-border); background: var(--bg-card); backdrop-filter: blur(10px);">
+        <p style="color: var(--text-muted);">&copy; 2026 HelperHub. Designed for the students of the future.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/tools.js"></script>
+</body>
+</html>

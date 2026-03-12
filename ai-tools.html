@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools | HelperHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>HelperHub</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="ai-tools.html" class="active">AI Tools</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="papers.html">Previous Papers</a></li>
+            <li><a href="planner.html">Study Planner</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </nav>
+
+    <section style="padding: 10rem 6% 5rem;">
+        <div class="section-header">
+            <h2>AI Powered Tools</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Harness the power of AI to supercharge your study routine.</p>
+        </div>
+
+        <div class="grid-layout">
+            <div class="modern-card" onclick="openModal('modal-summarizer')">
+                <div class="modern-card-icon"><i class="fas fa-file-alt"></i></div>
+                <h3>Text Summarizer</h3>
+                <p>Paste long articles or notes and get a concise, AI-generated summary instantly.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-essay')">
+                <div class="modern-card-icon"><i class="fas fa-lightbulb"></i></div>
+                <h3>Essay Idea Gen</h3>
+                <p>Stuck on an essay? Enter your topic and get creative ideas and structures.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-questions')">
+                <div class="modern-card-icon"><i class="fas fa-question-circle"></i></div>
+                <h3>Question Gen</h3>
+                <p>Generate practice questions from your notes to test your understanding.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-caption')">
+                <div class="modern-card-icon"><i class="fas fa-hashtag"></i></div>
+                <h3>Caption Generator</h3>
+                <p>Generate catchy captions for your educational or student life social posts.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="modal-summarizer" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem;">Text Summarizer</h2>
+            <textarea id="summarizer-input" style="height: 200px;" placeholder="Paste long text here..."></textarea>
+            <button onclick="aiSummarize()" class="btn-primary" style="width: 100%; margin-bottom: 2rem;">Summarize with AI</button>
+            <div class="glass" id="summarizer-result" style="padding: 2rem; border-radius: 20px; display: none;">
+                <h4 style="margin-bottom: 1rem; color: var(--primary);">Summary:</h4>
+                <p id="summary-text" style="font-size: 1rem; color: var(--text-main);"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-essay" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem;">Essay Idea Generator</h2>
+            <input type="text" id="essay-topic" placeholder="Enter essay topic...">
+            <button onclick="aiEssayIdeas()" class="btn-primary" style="width: 100%; margin-bottom: 2rem;">Generate Ideas</button>
+            <div class="glass" id="essay-result" style="padding: 2rem; border-radius: 20px; display: none;">
+                <h4 style="margin-bottom: 1rem; color: var(--primary);">AI Suggestions:</h4>
+                <ul id="essay-list" style="padding-left: 1.5rem; color: var(--text-main);"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-questions" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem;">Study Question Generator</h2>
+            <textarea id="questions-input" style="height: 150px;" placeholder="Paste your notes here..."></textarea>
+            <button onclick="aiGenerateQuestions()" class="btn-primary" style="width: 100%; margin-bottom: 2rem;">Generate Questions</button>
+            <div class="glass" id="questions-result" style="padding: 2rem; border-radius: 20px; display: none;">
+                <h4 style="margin-bottom: 1rem; color: var(--primary);">Practice Questions:</h4>
+                <div id="questions-list" style="color: var(--text-main);"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-caption" class="modal-overlay">
+        <div class="modal-content-futuristic">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2rem;">Caption Generator</h2>
+            <input type="text" id="caption-context" placeholder="What is your post about?">
+            <button onclick="aiGenerateCaptions()" class="btn-primary" style="width: 100%; margin-bottom: 2rem;">Generate Captions</button>
+            <div class="glass" id="caption-result" style="padding: 2rem; border-radius: 20px; display: none;">
+                <h4 style="margin-bottom: 1rem; color: var(--primary);">Catchy Captions:</h4>
+                <div id="caption-list" style="color: var(--text-main);"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="padding: 6rem 6%; text-align: center; border-top: 1px solid var(--glass-border); background: var(--bg-card); backdrop-filter: blur(10px);">
+        <p style="color: var(--text-muted);">&copy; 2026 HelperHub. Designed for the students of the future.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/ai-tools.js"></script>
+</body>
+</html>

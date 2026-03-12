@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Helper Hub | Futuristic Productivity</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>HelperHub</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="ai-tools.html">AI Tools</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="papers.html">Previous Papers</a></li>
+            <li><a href="planner.html">Study Planner</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Elevate Your Learning Experience</h1>
+            <p class="hero-subtitle">The all-in-one futuristic toolkit for modern students. Calculate CGPA, plan your studies, and access resources with a sleek, interactive interface.</p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <a href="tools.html" class="btn-primary">Get Started</a>
+                <a href="#features" class="btn-primary" style="background: transparent; border: 1px solid var(--primary); color: var(--primary); box-shadow: none;">Learn More</a>
+            </div>
+        </div>
+        <div style="position: absolute; right: 2%; bottom: 5%; width: 45%; opacity: 0.9; z-index: 1;" class="animate-float">
+            <img src="images/hero.png" alt="Futuristic Study Illustration" style="width: 100%; filter: drop-shadow(0 0 30px var(--primary-glow));">
+        </div>
+    </header>
+
+    <section id="features" style="padding: 10rem 6%;">
+        <div class="section-header">
+            <h2>Modern Features</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Crafted for efficiency, designed for the future.</p>
+        </div>
+        
+        <div class="grid-layout">
+            <div class="modern-card" onclick="location.href='tools.html'">
+                <div class="modern-card-icon"><i class="fas fa-rocket"></i></div>
+                <h3>Smart Tools</h3>
+                <p>Dynamic CGPA/Percentage calculators and productivity timers designed for focus.</p>
+            </div>
+            <div class="modern-card" onclick="location.href='notes.html'">
+                <div class="modern-card-icon"><i class="fas fa-brain"></i></div>
+                <h3>Digital Notes</h3>
+                <p>Organize and access your study materials anytime, anywhere with a refined UI.</p>
+            </div>
+            <div class="modern-card" onclick="location.href='papers.html'">
+                <div class="modern-card-icon"><i class="fas fa-file-invoice"></i></div>
+                <h3>Resource Hub</h3>
+                <p>Instant access to previous years' question papers and essential study guides.</p>
+            </div>
+            <div class="modern-card" onclick="location.href='planner.html'">
+                <div class="modern-card-icon"><i class="fas fa-calendar-check"></i></div>
+                <h3>Study Planner</h3>
+                <p>Maximize your productivity with our intuitive drag-and-drop study organizer.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 6rem 6%; text-align: center; border-top: 1px solid var(--glass-border); background: var(--bg-card); backdrop-filter: blur(10px);">
+        <p style="color: var(--text-muted);">&copy; 2026 HelperHub. Designed for the students of the future.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

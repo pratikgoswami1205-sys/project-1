@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes | HelperHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>HelperHub</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="ai-tools.html">AI Tools</a></li>
+            <li><a href="notes.html" class="active">Notes</a></li>
+            <li><a href="papers.html">Previous Papers</a></li>
+            <li><a href="planner.html">Study Planner</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </nav>
+
+    <section style="padding: 10rem 6% 5rem;">
+        <div class="section-header">
+            <h2>Study Notes</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Comprehensive resources for your academic journey.</p>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 4rem; flex-wrap: wrap;">
+            <button class="glass-tab active" onclick="filterResources('all')">All Notes</button>
+            <button class="glass-tab" onclick="filterResources('web')">Web Dev</button>
+            <button class="glass-tab" onclick="filterResources('data')">Data Science</button>
+            <button class="glass-tab" onclick="filterResources('db')">Databases</button>
+            <button class="glass-tab" onclick="filterResources('dsa')">Algorithms</button>
+        </div>
+
+        <div class="grid-layout" id="resources-grid">
+            <!-- Subjects -->
+            <div class="modern-card" data-category="web">
+                <div class="modern-card-icon"><i class="fab fa-js"></i></div>
+                <h3>JavaScript Mastery</h3>
+                <p>Complete guide to ES6+, Asynchronous JS, and DOM manipulation for modern web devs.</p>
+                <button class="btn-primary" style="margin-top: 2rem; width: 100%;" onclick="alert('Downloading JS Notes...')">Download PDF</button>
+            </div>
+
+            <div class="modern-card" data-category="data">
+                <div class="modern-card-icon"><i class="fab fa-python"></i></div>
+                <h3>Python for Data</h3>
+                <p>Learn NumPy, Pandas, and Matplotlib from scratch for powerful data analysis.</p>
+                <button class="btn-primary" style="margin-top: 2rem; width: 100%;" onclick="alert('Downloading Python Notes...')">Download PDF</button>
+            </div>
+
+            <div class="modern-card" data-category="db">
+                <div class="modern-card-icon"><i class="fas fa-database"></i></div>
+                <h3>DBMS & SQL</h3>
+                <p>Master relational databases, normalization, and complex queries with ease.</p>
+                <button class="btn-primary" style="margin-top: 2rem; width: 100%;" onclick="alert('Downloading DBMS Notes...')">Download PDF</button>
+            </div>
+
+            <div class="modern-card" data-category="dsa">
+                <div class="modern-card-icon"><i class="fas fa-network-wired"></i></div>
+                <h3>Data Structures</h3>
+                <p>In-depth coverage of Linked Lists, Trees, Graphs, and industry-standard Algorithms.</p>
+                <button class="btn-primary" style="margin-top: 2rem; width: 100%;" onclick="alert('Downloading DSA Notes...')">Download PDF</button>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 6rem 6%; text-align: center; border-top: 1px solid var(--glass-border); background: var(--bg-card); backdrop-filter: blur(10px);">
+        <p style="color: var(--text-muted);">&copy; 2026 HelperHub. Designed for the students of the future.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/resources.js"></script>
+</body>
+</html>
