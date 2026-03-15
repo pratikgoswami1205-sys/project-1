@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Study Assistant | HelperHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader-wrapper">
+        <i class="fas fa-graduation-cap loader-logo"></i>
+        <div class="loader-progress-container">
+            <div class="loader-progress-bar"></div>
+        </div>
+    </div>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>HelperHub</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="ai-tools.html" class="active">AI Tools</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="papers.html">Previous Papers</a></li>
+            <li><a href="planner.html">Study Planner</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </nav>
+
+    <section style="padding: 10rem 6% 5rem;">
+        <div class="section-header">
+            <h2>AI Study Assistant</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Your personal glowing neon tutor. Ask anything.</p>
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-header-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.2rem; margin: 0; color: var(--text-main);">StudyBot 3000</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Online and ready to help</p>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <div class="chat-message ai">
+                    Hello! I am your AI Study Assistant. I can help you understand complex topics, solve equations, or brainstorm essay ideas. What are we studying today?
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" class="chat-input" placeholder="Ask any study question..." onkeypress="handleEncryptEnter(event)">
+                <button onclick="sendMessage()" class="chat-send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+    <script src="js/ai-assistant.js"></script>
+</body>
+</html>

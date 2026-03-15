@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Tracker | HelperHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader-wrapper">
+        <i class="fas fa-graduation-cap loader-logo"></i>
+        <div class="loader-progress-container">
+            <div class="loader-progress-bar"></div>
+        </div>
+    </div>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>HelperHub</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tools.html" class="active">Tools</a></li>
+            <li><a href="ai-tools.html">AI Tools</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="papers.html">Previous Papers</a></li>
+            <li><a href="planner.html">Study Planner</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </nav>
+
+    <section style="padding: 10rem 6% 5rem;">
+        <div class="section-header">
+            <h2>Study Progress Tracker</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Track your study hours and stay motivated.</p>
+        </div>
+
+        <div class="tracker-container">
+            <!-- Data Entry & Motivation -->
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+                <div class="tracker-card">
+                    <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-clock" style="color: var(--primary);"></i> Log Study Hours</h3>
+                    <input type="number" id="study-hours-input" placeholder="Enter hours studied today..." min="0" max="24" step="0.5">
+                    <button onclick="logHours()" class="btn-primary" style="width: 100%;">Log Time</button>
+                    
+                    <div id="motivational-message" class="motivational-msg" style="display: none;">
+                        Great job! Keep learning.
+                    </div>
+                </div>
+                
+                <div class="tracker-card">
+                    <h3 style="margin-bottom: 1rem;"><i class="fas fa-bullseye" style="color: var(--secondary);"></i> Weekly Goal</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Target: 20 Hours</p>
+                    <div class="glow-progress-bg">
+                        <div class="glow-progress-bar" id="weekly-progress-bar"></div>
+                    </div>
+                    <p style="text-align: right; margin-top: 0.5rem; font-size: 0.9rem; font-weight: bold;" id="weekly-progress-text">0 / 20 hrs</p>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="tracker-card" style="display: flex; align-items: center; justify-content: center; min-height: 400px;">
+                <canvas id="progressChart" width="400" height="300"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+    <script src="js/progress-tracker.js"></script>
+</body>
+</html>

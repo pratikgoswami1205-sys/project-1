@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loader-wrapper">
+        <i class="fas fa-graduation-cap loader-logo"></i>
+        <div class="loader-progress-container">
+            <div class="loader-progress-bar"></div>
+        </div>
+    </div>
     <nav class="navbar">
         <div class="logo">
             <i class="fas fa-graduation-cap"></i>
@@ -28,37 +35,67 @@
         </div>
     </nav>
 
-    <section style="padding: 10rem 6% 5rem; display: flex; justify-content: center;">
-        <div class="modern-card" style="max-width: 900px; display: flex; flex-direction: row; gap: 4rem; padding: 4rem; align-items: center; flex-wrap: wrap; border-radius: 40px;">
-            <div class="profile-img-container" style="width: 250px; height: 250px; flex-shrink: 0; border: 4px solid var(--primary); padding: 5px; border-radius: 40px; background: var(--bg-card); overflow: hidden; box-shadow: 0 0 30px var(--primary-glow);">
-                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; border-radius: 35px;">
-                    <i class="fas fa-user-astronaut" style="font-size: 8rem; color: white; filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));"></i>
+    <section style="padding: 10rem 6% 5rem; display: flex; flex-direction: column; align-items: center; gap: 4rem;">
+        <div class="modern-card" style="max-width: 1000px; width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; padding: 4rem; align-items: center; border-radius: 40px;">
+            <div style="display: flex; justify-content: center;">
+                <div class="profile-img-frame animate-soft-float">
+                    <img src="images/profile.jpg" alt="Pratik Giri" onerror="this.outerHTML='<div class=\'profile-fallback\'><i class=\'fas fa-user\'></i></div>'">
                 </div>
             </div>
             
-            <div class="profile-info" style="flex: 1; min-width: 300px;">
-                <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 0.5rem; letter-spacing: -2px;">WAKODE</h1>
-                <p style="color: var(--primary); font-weight: 800; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem;">Full Stack AI Architect</p>
-                <p class="bio" style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2.5rem;">
-                    Passionate student helper and developer specializing in creating intelligent, futuristic web solutions. 
-                    Committed to making education more accessible and productive through bleeding-edge technology.
+            <div class="profile-info">
+                <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 0.5rem; letter-spacing: -2px;">Pratik Giri</h1>
+                <p style="color: var(--primary); font-weight: 800; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem;">BCA Final Year Student | Web Developer | Data Enthusiast</p>
+                <div class="typing-container" style="min-height: 1.5rem; margin-bottom: 2rem; font-family: monospace; font-size: 1.2rem; color: var(--secondary);">
+                    <span id="typing-text"></span><span class="typing-cursor">|</span>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; color: var(--text-muted);">
+                    <span><i class="fas fa-map-marker-alt"></i> Akola, Maharashtra, India</span>
+                </div>
+                <p class="bio" style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2.5rem;">
+                    I am a BCA final year student and passionate web developer who enjoys building useful digital tools for students and exploring data analysis to solve real problems.
                 </p>
                 
-                <div style="margin-bottom: 3rem;">
-                    <h3 style="margin-bottom: 1.2rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main);">Core Expertise</h3>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.8rem;">
-                        <span class="glass" style="padding: 0.6rem 1.4rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border-color: var(--primary-light);">Next.js</span>
-                        <span class="glass" style="padding: 0.6rem 1.4rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border-color: var(--primary-light);">Generative AI</span>
-                        <span class="glass" style="padding: 0.6rem 1.4rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border-color: var(--primary-light);">Three.js</span>
-                        <span class="glass" style="padding: 0.6rem 1.4rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; border-color: var(--primary-light);">UI/UX</span>
-                    </div>
+                <div class="social-links-futuristic" style="margin-top: 0;">
+                    <a href="https://github.com/pratikgoswami1205-sys" target="_blank" class="social-icon-btn"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/pratik-giri-6382153b0" target="_blank" class="social-icon-btn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:pratikgoswami1205@gmail.com" class="social-icon-btn"><i class="far fa-envelope"></i></a>
                 </div>
+            </div>
+        </div>
 
-                <div style="display: flex; gap: 1.5rem;">
-                    <a href="#" class="btn-primary" style="width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 15px;"><i class="fab fa-github"></i></a>
-                    <a href="#" class="btn-primary" style="width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 15px; background: #0077b5;"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="btn-primary" style="width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 15px; background: #1da1f2;"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="btn-primary" style="width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 15px; background: #ea4335;"><i class="far fa-envelope"></i></a>
+        <div style="max-width: 1000px; width: 100%;">
+            <div class="section-header" style="margin-bottom: 3rem; text-align: left;">
+                <h2>Mastered Skills</h2>
+                <p style="color: var(--text-muted);">Tools and technologies I use to build the future.</p>
+            </div>
+            <div class="skill-grid" style="grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 2rem;">
+                <div class="skill-card glass" style="border-radius: 24px; padding: 2rem 1.5rem; transition: all 0.4s ease;"><i class="fab fa-html5" style="color: #e34f26; background: none; -webkit-text-fill-color: initial;"></i><span style="font-size: 0.95rem;">HTML</span></div>
+                <div class="skill-card glass" style="border-radius: 24px; padding: 2rem 1.5rem; transition: all 0.4s ease;"><i class="fab fa-css3-alt" style="color: #1572b6; background: none; -webkit-text-fill-color: initial;"></i><span style="font-size: 0.95rem;">CSS</span></div>
+                <div class="skill-card glass" style="border-radius: 24px; padding: 2rem 1.5rem; transition: all 0.4s ease;"><i class="fab fa-js" style="color: #f7df1e; background: none; -webkit-text-fill-color: initial;"></i><span style="font-size: 0.95rem;">JavaScript</span></div>
+                <div class="skill-card glass" style="border-radius: 24px; padding: 2rem 1.5rem; transition: all 0.4s ease;"><i class="fab fa-react" style="color: #61dafb; background: none; -webkit-text-fill-color: initial;"></i><span style="font-size: 0.95rem;">React</span></div>
+                <div class="skill-card glass" style="border-radius: 24px; padding: 2rem 1.5rem; transition: all 0.4s ease;"><i class="fab fa-python" style="color: #3776ab; background: none; -webkit-text-fill-color: initial;"></i><span style="font-size: 0.95rem;">Python</span></div>
+                <div class="skill-card glass" style="border-radius: 24px; padding: 2rem 1.5rem; transition: all 0.4s ease;"><i class="fas fa-chart-bar" style="color: #ff9800; background: none; -webkit-text-fill-color: initial;"></i><span style="font-size: 0.95rem;">Data Analysis</span></div>
+                <div class="skill-card glass" style="border-radius: 24px; padding: 2rem 1.5rem; transition: all 0.4s ease;"><i class="fas fa-c" style="color: #a8b9cc; background: none; -webkit-text-fill-color: initial;"></i><span style="font-size: 0.95rem;">C</span></div>
+                <div class="skill-card glass" style="border-radius: 24px; padding: 2rem 1.5rem; transition: all 0.4s ease;"><i style="font-style: normal; font-weight: 800; color: #00599c; background: none; -webkit-text-fill-color: initial;">C++</i><span style="font-size: 0.95rem;">C++</span></div>
+                <div class="skill-card glass" style="border-radius: 24px; padding: 2rem 1.5rem; transition: all 0.4s ease;"><i style="font-style: normal; font-weight: 800; color: #9b4f96; background: none; -webkit-text-fill-color: initial;">C#</i><span style="font-size: 0.95rem;">C#</span></div>
+            </div>
+        </div>
+
+        <div style="max-width: 1000px; width: 100%;">
+            <div class="section-header" style="margin-bottom: 3rem; text-align: left;">
+                <h2>Featured Project</h2>
+            </div>
+            <div class="modern-card tilt-card" style="padding: 4rem; border-radius: 40px; border: 2px solid var(--primary-light); background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(99, 102, 241, 0.15)); backdrop-filter: blur(20px); box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 20px var(--primary-glow);">
+                <div style="display: flex; gap: 3rem; align-items: center; flex-wrap: wrap;">
+                    <div class="modern-card-icon" style="margin-bottom: 0; font-size: 5rem; animation: float 4s ease-in-out infinite; text-shadow: 0 0 30px var(--primary);"><i class="fas fa-rocket"></i></div>
+                    <div style="flex: 1; min-width: 250px;">
+                        <span style="color: var(--secondary); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px;">Featured Productivity Platform</span>
+                        <h3 style="font-size: 2.5rem; margin: 0.5rem 0 1.5rem; font-weight: 900; letter-spacing: -1px;">Questboard</h3>
+                        <p style="margin-bottom: 2.5rem; font-size: 1.15rem; color: var(--text-muted); line-height: 1.8;">A smart, gamified productivity and task management platform designed specifically for students to organize study tasks, notes, and learning tools in one beautifully unified space.</p>
+                        <a href="https://github.com/pratikgoswami1205-sys" target="_blank" class="btn-primary" style="padding: 1.2rem 2.5rem; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 0.8rem;"><i class="fas fa-external-link-alt"></i> View Questboard</a>
+                    </div>
                 </div>
             </div>
         </div>

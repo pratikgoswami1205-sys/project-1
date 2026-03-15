@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loader-wrapper">
+        <i class="fas fa-graduation-cap loader-logo"></i>
+        <div class="loader-progress-container">
+            <div class="loader-progress-bar"></div>
+        </div>
+    </div>
     <nav class="navbar">
         <div class="logo">
             <i class="fas fa-graduation-cap"></i>
@@ -31,62 +38,67 @@
     <section style="padding: 10rem 6% 5rem;">
         <div class="section-header">
             <h2>Get In Touch</h2>
-            <p style="color: var(--text-muted); font-size: 1.1rem;">Have questions or suggestions? We're here to help.</p>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Have questions or suggestions? I'm here to help.</p>
         </div>
 
-        <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start;">
+        <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; align-items: start;">
             <div class="modern-card" style="padding: 3.5rem; border-radius: 35px;">
                 <h3 style="margin-bottom: 2.5rem; font-size: 1.8rem; letter-spacing: -1px;">Send a Message</h3>
-                <form id="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully to the future!'); this.reset();">
+                <form id="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!'); this.reset();">
                     <div style="margin-bottom: 1.5rem;">
-                        <label style="display: block; margin-bottom: 0.6rem; font-weight: 600; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Full Name</label>
-                        <input type="text" placeholder="John Doe" required>
+                        <label style="display: block; margin-bottom: 0.6rem; font-weight: 600; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Name</label>
+                        <input type="text" placeholder="Pratik Giri" required>
                     </div>
                     <div style="margin-bottom: 1.5rem;">
-                        <label style="display: block; margin-bottom: 0.6rem; font-weight: 600; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Email Address</label>
-                        <input type="email" placeholder="john@example.com" required>
+                        <label style="display: block; margin-bottom: 0.6rem; font-weight: 600; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Email</label>
+                        <input type="email" placeholder="pratikgoswami1205@gmail.com" required>
                     </div>
                     <div style="margin-bottom: 2rem;">
                         <label style="display: block; margin-bottom: 0.6rem; font-weight: 600; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Message</label>
-                        <textarea placeholder="Your message here..." style="height: 160px; resize: none;"></textarea>
+                        <textarea placeholder="Your message here..." style="height: 160px; resize: none;" required></textarea>
                     </div>
-                    <button type="submit" class="btn-primary" style="width: 100%; height: 60px; font-size: 1.1rem; font-weight: 700;">Broadcast Message</button>
+                    <button type="submit" class="btn-primary" style="width: 100%; height: 60px; font-size: 1.1rem; font-weight: 700;">Send Message</button>
                 </form>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 2rem;">
-                <div class="modern-card" style="padding: 2.5rem; border-radius: 25px;">
+                <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+                    <div class="profile-img-frame" style="width: 150px; height: 150px;">
+                        <img src="images/profile.jpg" alt="Pratik Giri" onerror="this.outerHTML='<div class=\'profile-fallback\' style=\'font-size: 2.5rem;\'><i class=\'fas fa-user\'></i></div>'">
+                    </div>
+                </div>
+                <div class="modern-card tilt-card" style="padding: 2.5rem; border-radius: 25px;">
                     <div style="display: flex; align-items: center; gap: 2rem;">
                         <div class="modern-card-icon" style="margin-bottom: 0; width: 60px; height: 60px; min-width: 60px;"><i class="fas fa-map-marker-alt" style="font-size: 1.5rem;"></i></div>
                         <div>
-                            <h4 style="font-size: 1.1rem; margin-bottom: 0.3rem;">Headquarters</h4>
-                            <p style="color: var(--text-muted); font-size: 0.95rem;">Digital Space, Virtual Galaxy 42</p>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.3rem;">Location</h4>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Akola, Maharashtra, India</p>
                         </div>
                     </div>
                 </div>
-                <div class="modern-card" style="padding: 2.5rem; border-radius: 25px;">
+                <div class="modern-card tilt-card" style="padding: 2.5rem; border-radius: 25px;">
                     <div style="display: flex; align-items: center; gap: 2rem;">
                         <div class="modern-card-icon" style="margin-bottom: 0; width: 60px; height: 60px; min-width: 60px;"><i class="fas fa-envelope" style="font-size: 1.5rem;"></i></div>
                         <div>
-                            <h4 style="font-size: 1.1rem; margin-bottom: 0.3rem;">Direct Email</h4>
-                            <p style="color: var(--text-muted); font-size: 0.95rem;">support@helperhub.ai</p>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.3rem;">Email</h4>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">pratikgoswami1205@gmail.com</p>
                         </div>
                     </div>
                 </div>
-                <div class="modern-card" style="padding: 2.5rem; border-radius: 25px;">
+                <div class="modern-card tilt-card" style="padding: 2.5rem; border-radius: 25px;">
                     <div style="display: flex; align-items: center; gap: 2rem;">
                         <div class="modern-card-icon" style="margin-bottom: 0; width: 60px; height: 60px; min-width: 60px;"><i class="fas fa-phone" style="font-size: 1.5rem;"></i></div>
                         <div>
-                            <h4 style="font-size: 1.1rem; margin-bottom: 0.3rem;">Voice Hub</h4>
-                            <p style="color: var(--text-muted); font-size: 0.95rem;">+1 (234) 567-890</p>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.3rem;">Phone</h4>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">+91 7666047306</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="glass" style="padding: 2.5rem; border-radius: 30px; text-align: center; border-color: var(--primary-light);">
-                    <p style="font-weight: 700; color: var(--text-main); margin-bottom: 1rem;">Available 24/7 for you.</p>
+                    <p style="font-weight: 700; color: var(--text-main); margin-bottom: 1rem;">Let's Build Something Great Together!</p>
                     <div style="width: 10px; height: 10px; background: #2ecc71; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #2ecc71;"></div>
-                    <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 0.5rem; text-transform: uppercase;">System Online</span>
+                    <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 0.5rem; text-transform: uppercase;">Available for Projects</span>
                 </div>
             </div>
         </div>
