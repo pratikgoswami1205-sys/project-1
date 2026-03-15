@@ -7,6 +7,11 @@ function handleEncryptEnter(e) {
     }
 }
 
+window.useSuggestion = function(text) {
+    chatInput.value = text;
+    sendMessage();
+};
+
 function sendMessage() {
     const text = chatInput.value.trim();
     if (!text) return;

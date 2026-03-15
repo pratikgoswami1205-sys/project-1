@@ -149,6 +149,44 @@ function updateTimerDisplay() {
     display.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
 
+// Stopwatch Logic
+let stopwatchInterval;
+let stopwatchTime = 0;
+let isStopwatchRunning = false;
+
+window.startStopwatch = function() {
+    if (isStopwatchRunning) return;
+    isStopwatchRunning = true;
+    document.getElementById('stopwatch-display').style.color = 'var(--primary)';
+    
+    stopwatchInterval = setInterval(() => {
+        stopwatchTime++;
+        updateStopwatchDisplay();
+    }, 1000);
+};
+
+window.pauseStopwatch = function() {
+    clearInterval(stopwatchInterval);
+    isStopwatchRunning = false;
+    document.getElementById('stopwatch-display').style.color = 'var(--text-main)';
+};
+
+window.resetStopwatch = function() {
+    pauseStopwatch();
+    stopwatchTime = 0;
+    updateStopwatchDisplay();
+};
+
+function updateStopwatchDisplay() {
+    const display = document.getElementById('stopwatch-display');
+    if (!display) return;
+    
+    const hrs = Math.floor(stopwatchTime / 3600);
+    const mins = Math.floor((stopwatchTime % 3600) / 60);
+    const secs = stopwatchTime % 60;
+    display.innerText = `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+
 // Unit Converter Logic
 window.convertUnits = function() {
     const input = document.getElementById('unit-input');
@@ -216,40 +254,77 @@ document.addEventListener('input', (e) => {
 
 // To-Do List Logic
 let todos = JSON.parse(localStorage.getItem('hub-todos')) || [];
-window.addTodo = function() {
-    const input = document.getElementById('todo-input');
-    if (!input.value.trim()) return;
-    todos.push({ text: input.value, completed: false });
+
+window.addTodo = function(inputElId = 'todo-input') {
+    const input = document.getElementById(inputElId);
+    if (!input || !input.value.trim()) return;
+    todos.push({ text: input.value, completed: false, date: new Date().toISOString() });
     input.value = '';
-    renderTodos();
-    saveTodos();
+    syncProductivityData();
 };
 
 window.toggleTodo = function(index) {
     todos[index].completed = !todos[index].completed;
-    renderTodos();
-    saveTodos();
+    syncProductivityData();
 };
 
 window.removeTodo = function(index) {
     todos.splice(index, 1);
-    renderTodos();
+    syncProductivityData();
+};
+
+window.syncProductivityData = function() {
     saveTodos();
+    renderTodos();
+    if (window.renderDashTasks) window.renderDashTasks();
+    if (window.updateWeeklyProgress) window.updateWeeklyProgress();
 };
 
 function renderTodos() {
     const list = document.getElementById('todo-list');
     if (!list) return;
     list.innerHTML = todos.map((t, i) => `
-        <div class="glass" style="display: flex; align-items: center; padding: 1rem; margin-bottom: 0.5rem; border-radius: 12px; gap: 1rem;">
-            <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTodo(${i})" style="width: 20px; height: 20px; margin: 0;">
+        <div class="glass" style="display: flex; align-items: center; padding: 1rem; margin-bottom: 0.5rem; border-radius: 12px; gap: 1rem; border: 1px solid ${t.completed ? 'var(--primary-glow)' : 'var(--glass-border)'}">
+            <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTodo(${i})" style="width: 20px; height: 20px; margin: 0; cursor: pointer;">
             <span style="flex: 1; ${t.completed ? 'text-decoration: line-through; opacity: 0.5;' : ''}">${t.text}</span>
-            <i class="fas fa-trash" onclick="removeTodo(${i})" style="cursor: pointer; color: #ff4757;"></i>
+            <i class="fas fa-trash" onclick="removeTodo(${i})" style="cursor: pointer; color: #ff4757; opacity: 0.7;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7"></i>
         </div>
-    `).join('');
+    `).join('') || '<p style="text-align: center; color: var(--text-muted); padding: 1rem;">No tasks yet.</p>';
 }
 
 function saveTodos() { localStorage.setItem('hub-todos', JSON.stringify(todos)); }
+
+// Study Statistics Logic
+window.getStudyStats = function() {
+    return JSON.parse(localStorage.getItem('hub-study-stats')) || {
+        todayHours: 0,
+        weeklyHours: [0, 0, 0, 0, 0, 0, 0], // Mon-Sun
+        lastUpdate: new Date().toDateString()
+    };
+};
+
+window.saveStudyStats = function(stats) {
+    localStorage.setItem('hub-study-stats', JSON.stringify(stats));
+    if (window.renderStudyData) window.renderStudyData();
+    if (window.updateWeeklyProgress) window.updateWeeklyProgress();
+};
+
+window.logStudyHours = function(hours) {
+    let stats = getStudyStats();
+    const today = new Date();
+    const dayIndex = (today.getDay() + 6) % 7; // Convert Sun-Sat(0-6) to Mon-Sun(0-6)
+    
+    // Reset if it's a new day
+    if (stats.lastUpdate !== today.toDateString()) {
+        stats.todayHours = 0;
+        stats.lastUpdate = today.toDateString();
+        // If it's a new week, we might want to reset the whole array, but for now just update today
+    }
+    
+    stats.todayHours += parseFloat(hours);
+    stats.weeklyHours[dayIndex] += parseFloat(hours);
+    saveStudyStats(stats);
+};
 
 // Password Generator Logic
 window.generatePassword = function() {

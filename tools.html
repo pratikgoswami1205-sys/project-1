@@ -7,7 +7,30 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="dark js-active dark">
+    <script>
+        // Emergency visibility restoration
+        (function() {
+            const restore = () => {
+                const loader = document.querySelector('.loader-wrapper');
+                if (loader) {
+                    loader.style.setProperty('display', 'none', 'important');
+                }
+                document.body.classList.remove('page-entering');
+                document.body.style.opacity = '1';
+                document.body.style.visibility = 'visible';
+                
+                // Reveal all elements if observer failed
+                document.querySelectorAll('.modern-card, .section-header, .hero-content, .grid-layout > div, .skill-card').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                    el.classList.add('animate-fade');
+                });
+            };
+            setTimeout(restore, 3000);
+            window.addEventListener('load', () => setTimeout(restore, 1000));
+        })();
+    </script>
     <!-- Loading Screen -->
     <div class="loader-wrapper">
         <i class="fas fa-graduation-cap loader-logo"></i>
@@ -23,8 +46,7 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="tools.html" class="active">Tools</a></li>
-            <li><a href="ai-tools.html">AI Tools</a></li>
-            <li><a href="notes.html">Notes</a></li>
+            <li><a href="notes.html">Study Notes</a></li>
             <li><a href="papers.html">Previous Papers</a></li>
             <li><a href="planner.html">Study Planner</a></li>
             <li><a href="profile.html">Profile</a></li>
@@ -36,6 +58,90 @@
     </nav>
 
     <section style="padding: 10rem 6% 5rem;">
+        <div class="section-header">
+            <h2>Productivity Dashboard</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Manage your growth and tasks with real-time analytics.</p>
+        </div>
+
+        <!-- Dashboard Widgets -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; margin-bottom: 5rem;">
+            <!-- Study Progress Tracker -->
+            <div class="modern-card dashboard-card" style="padding: 2.5rem; border: 1px solid var(--primary-light);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h3 style="margin: 0;"><i class="fas fa-chart-line" style="color: var(--primary); margin-right: 0.8rem;"></i>Progress Tracker</h3>
+                    <span id="tracker-status" style="background: var(--primary-glow); color: var(--primary); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">Progressing</span>
+                </div>
+                
+                <div style="margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem;">
+                        <span style="color: var(--text-muted); font-size: 0.9rem;">Weekly Study Goal</span>
+                        <span id="weekly-progress-text" style="color: var(--text-main); font-weight: 700;">0%</span>
+                    </div>
+                    <div style="height: 10px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden;">
+                        <div id="weekly-progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); box-shadow: 0 0 15px var(--primary-glow); transition: width 0.5s ease;"></div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                    <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 20px; text-align: center; border: 1px solid var(--glass-border);">
+                        <h4 id="dash-study-hours" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--primary);">0h</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Today's Hours</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 20px; text-align: center; border: 1px solid var(--glass-border);">
+                        <h4 id="dash-tasks-done" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--secondary);">0</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Tasks Done</p>
+                    </div>
+                </div>
+
+                <!-- Live Study Hours Input -->
+                <div style="display: flex; gap: 1rem;">
+                    <input type="number" id="study-hours-input" placeholder="Hours" style="margin-bottom: 0; padding: 0.8rem;">
+                    <button onclick="updateStudyHours()" class="btn-primary" style="padding: 0.8rem 1.5rem; font-size: 0.9rem; border-radius: 12px; box-shadow: none;">Log</button>
+                </div>
+            </div>
+
+            <!-- Task Manager Widget -->
+            <div class="modern-card dashboard-card" style="padding: 2.5rem; border: 1px solid var(--secondary-glow);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h3 style="margin: 0;"><i class="fas fa-tasks" style="color: var(--secondary); margin-right: 0.8rem;"></i>Task Manager</h3>
+                    <span id="task-count-badge" style="background: var(--secondary-glow); color: var(--secondary); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">0 Pending</span>
+                </div>
+                
+                <div style="display: flex; gap: 0.8rem; margin-bottom: 1.5rem;">
+                    <input type="text" id="dash-task-input" placeholder="What's for today?" style="margin-bottom: 0; padding: 0.8rem; flex: 1;">
+                    <button onclick="addDashTask()" class="btn-primary" style="padding: 0.8rem 1.2rem; border-radius: 12px; box-shadow: none;"><i class="fas fa-plus"></i></button>
+                </div>
+
+                <div id="dash-task-list" style="display: flex; flex-direction: column; gap: 0.8rem; max-height: 200px; overflow-y: auto; padding-right: 0.5rem;">
+                    <!-- Tasks will be injected here -->
+                </div>
+            </div>
+
+            <!-- Quick Pomodoro & Notes -->
+            <div style="display: grid; grid-template-rows: 1fr 1fr; gap: 2.5rem;">
+                <!-- Mini Pomodoro Card -->
+                <div class="modern-card dashboard-card" style="padding: 1.5rem; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1rem;"><i class="fas fa-clock" style="color: var(--accent); margin-right: 0.5rem;"></i>Focus Timer</h4>
+                        <div id="dash-pomo-display" style="font-size: 1.8rem; font-weight: 800; color: var(--text-main);">25:00</div>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="toggleDashPomo()" id="dash-pomo-btn" class="btn-primary" style="padding: 0.6rem 1rem; border-radius: 10px; font-size: 0.8rem; box-shadow: none;"><i class="fas fa-play"></i></button>
+                        <button onclick="resetDashPomo()" class="btn-primary" style="padding: 0.6rem 1rem; border-radius: 10px; font-size: 0.8rem; box-shadow: none; background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid var(--glass-border);"><i class="fas fa-undo"></i></button>
+                    </div>
+                </div>
+
+                <!-- Mini Notes Card -->
+                <div class="modern-card dashboard-card" style="padding: 1.5rem; border: 1px solid var(--text-muted);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="margin: 0; font-size: 1rem;"><i class="fas fa-sticky-note" style="color: var(--text-muted); margin-right: 0.5rem;"></i>Quick Note</h4>
+                        <button onclick="saveDashNote()" class="btn-primary" style="padding: 0.3rem 0.8rem; border-radius: 10px; font-size: 0.7rem; box-shadow: none;">Save</button>
+                    </div>
+                    <textarea id="dash-note-input" placeholder="Remember to..." style="height: 60px; font-size: 0.85rem; padding: 0.8rem; border-radius: 12px; background: rgba(255,255,255,0.02);"></textarea>
+                </div>
+            </div>
+        </div>
+
         <div class="section-header">
             <h2>Productivity Tools</h2>
             <p style="color: var(--text-muted); font-size: 1.1rem;">Empowering your studies with precision and elegance.</p>
@@ -61,8 +167,14 @@
             </div>
 
             <div class="modern-card" onclick="openModal('modal-timer')">
-                <div class="modern-card-icon"><i class="fas fa-clock"></i></div>
+                <div class="modern-card-icon"><i class="fas fa-stopwatch"></i></div>
                 <h3>Study Timer</h3>
+                <p>Track your raw study minutes using a standard stopwatch to log total session time.</p>
+            </div>
+
+            <div class="modern-card" onclick="openModal('modal-pomodoro')">
+                <div class="modern-card-icon"><i class="fas fa-clock"></i></div>
+                <h3>Pomodoro Timer</h3>
                 <p>Focus more with our customizable Pomodoro timer interface and smooth transitions.</p>
             </div>
 
@@ -106,6 +218,18 @@
                 <div class="modern-card-icon"><i class="fas fa-chart-line"></i></div>
                 <h3>Progress Tracker</h3>
                 <p>Track your daily study hours with animated charts and stay motivated.</p>
+            </div>
+
+            <div class="modern-card" onclick="location.href='notes.html'">
+                <div class="modern-card-icon"><i class="fas fa-sticky-note"></i></div>
+                <h3>Quick Notes</h3>
+                <p>Jot down important study points quickly and access them across devices.</p>
+            </div>
+
+            <div class="modern-card" onclick="location.href='resources.html'">
+                <div class="modern-card-icon"><i class="fas fa-globe"></i></div>
+                <h3>Resources Hub</h3>
+                <p>Curated programming platforms, dev tools, and essential study resources.</p>
             </div>
         </div>
     </section>
@@ -173,12 +297,27 @@
     <div id="modal-timer" class="modal-overlay">
         <div class="modal-content-futuristic" style="text-align: center;">
             <span class="close-modal"><i class="fas fa-times"></i></span>
-            <h2 style="margin-bottom: 2.5rem; letter-spacing: -1px;">Study Timer</h2>
+            <h2 style="margin-bottom: 2.5rem; letter-spacing: -1px;">Study Timer (Stopwatch)</h2>
+            <div class="glass" style="padding: 4rem 2rem; text-align: center; border-radius: 40px; margin-bottom: 3rem; border-width: 2px;">
+                <span id="stopwatch-display" style="font-size: 6rem; font-weight: 900; color: var(--text-main); font-variant-numeric: tabular-nums; letter-spacing: -2px;">00:00:00</span>
+            </div>
+            <div style="display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;">
+                <button onclick="startStopwatch()" class="btn-primary" style="min-width: 140px;">Start</button>
+                <button onclick="pauseStopwatch()" class="btn-primary" style="min-width: 140px; background: var(--bg-card); border: 1px solid var(--glass-border); color: var(--text-main); box-shadow: none;">Pause</button>
+                <button onclick="resetStopwatch()" class="btn-primary" style="min-width: 140px; background: transparent; border: 1px solid #ff4757; color: #ff4757; box-shadow: none;">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-pomodoro" class="modal-overlay">
+        <div class="modal-content-futuristic" style="text-align: center;">
+            <span class="close-modal"><i class="fas fa-times"></i></span>
+            <h2 style="margin-bottom: 2.5rem; letter-spacing: -1px;">Pomodoro Timer</h2>
             <div class="glass" style="padding: 4rem 2rem; text-align: center; border-radius: 40px; margin-bottom: 3rem; border-width: 2px;">
                 <span id="timer-display" style="font-size: 6rem; font-weight: 900; color: var(--text-main); font-variant-numeric: tabular-nums; letter-spacing: -2px;">25:00</span>
             </div>
             <div style="display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;">
-                <button onclick="startTimer()" class="btn-primary" style="min-width: 140px;">Start Session</button>
+                <button onclick="startTimer()" class="btn-primary" style="min-width: 140px;">Focus</button>
                 <button onclick="pauseTimer()" class="btn-primary" style="min-width: 140px; background: var(--bg-card); border: 1px solid var(--glass-border); color: var(--text-main); box-shadow: none;">Pause</button>
                 <button onclick="resetTimer()" class="btn-primary" style="min-width: 140px; background: transparent; border: 1px solid #ff4757; color: #ff4757; box-shadow: none;">Reset</button>
             </div>
@@ -275,10 +414,16 @@
     </div>
 
     <footer style="padding: 6rem 6%; text-align: center; border-top: 1px solid var(--glass-border); background: var(--bg-card); backdrop-filter: blur(10px);">
-        <p style="color: var(--text-muted);">&copy; 2026 HelperHub. Designed for the students of the future.</p>
+        <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem;">
+            <a href="https://github.com/pratikgoswami1205-sys" target="_blank" style="color: var(--text-muted); font-size: 1.5rem; transition: var(--transition);" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/pratik-giri-6382153b0" target="_blank" style="color: var(--text-muted); font-size: 1.5rem; transition: var(--transition);" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p style="color: var(--text-main); font-weight: 600; margin-bottom: 0.5rem;">Developed with <i class="fas fa-heart" style="color: #ff4757;"></i> by Pratik Giri</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 HelperHub. Designed for the students of the future.</p>
     </footer>
 
     <script src="js/script.js"></script>
     <script src="js/tools.js"></script>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>

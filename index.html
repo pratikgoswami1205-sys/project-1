@@ -7,7 +7,30 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="dark js-active dark">
+    <script>
+        // Emergency visibility restoration
+        (function() {
+            const restore = () => {
+                const loader = document.querySelector('.loader-wrapper');
+                if (loader) {
+                    loader.style.setProperty('display', 'none', 'important');
+                }
+                document.body.classList.remove('page-entering');
+                document.body.style.opacity = '1';
+                document.body.style.visibility = 'visible';
+                
+                // Reveal all elements if observer failed
+                document.querySelectorAll('.modern-card, .section-header, .hero-content, .grid-layout > div, .skill-card').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                    el.classList.add('animate-fade');
+                });
+            };
+            setTimeout(restore, 3000);
+            window.addEventListener('load', () => setTimeout(restore, 1000));
+        })();
+    </script>
     <!-- Loading Screen -->
     <div class="loader-wrapper">
         <i class="fas fa-graduation-cap loader-logo"></i>
@@ -23,8 +46,7 @@
         <ul class="nav-links">
             <li><a href="index.html" class="active">Home</a></li>
             <li><a href="tools.html">Tools</a></li>
-            <li><a href="ai-tools.html">AI Tools</a></li>
-            <li><a href="notes.html">Notes</a></li>
+            <li><a href="notes.html">Study Notes</a></li>
             <li><a href="papers.html">Previous Papers</a></li>
             <li><a href="planner.html">Study Planner</a></li>
             <li><a href="profile.html">Profile</a></li>
@@ -35,17 +57,33 @@
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Elevate Your Learning Experience</h1>
-            <p class="hero-subtitle">The all-in-one futuristic toolkit for modern students. Calculate CGPA, plan your studies, and access resources with a sleek, interactive interface.</p>
-            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                <a href="tools.html" class="btn-primary">Get Started</a>
-                <a href="#features" class="btn-primary" style="background: transparent; border: 1px solid var(--primary); color: var(--primary); box-shadow: none;">Learn More</a>
+    <header class="hero" style="position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center;">
+        <div class="gradient-wave"></div>
+        <!-- Animated Background Particles -->
+        <div id="particles-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></div>
+        
+        <div class="hero-content" style="position: relative; z-index: 2; text-align: left; padding: 0 6%; width: 100%; max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <div style="max-width: 600px;">
+                <h1 class="hero-title" style="font-size: 5.5rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 1rem; position: relative;">
+                    <span style="color: var(--text-muted); font-size: 3.5rem; display: block; font-weight: 600; letter-spacing: normal; margin-bottom: -1.5rem;">Hi, I'm</span>
+                    Pratik Giri
+                </h1>
+                <p class="hero-subtitle" style="font-size: 1.6rem; color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 2rem;">BCA Final Year Student | Web Developer | Data Enthusiast</p>
+                
+                <div class="typing-container hero-typing" style="min-height: 3rem; margin-bottom: 3.5rem; font-family: monospace; font-size: 1.4rem; color: var(--secondary); display: flex; align-items: center; gap: 0.8rem; background: rgba(15, 23, 42, 0.6); padding: 1rem 1.5rem; border-radius: 12px; border: 1px solid var(--glass-border); backdrop-filter: blur(10px); width: fit-content;">
+                    <i class="fas fa-terminal" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+                    <div><span id="hero-typing-text"></span><span class="typing-cursor">|</span></div>
+                </div>
+                
+                <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                    <a href="tools.html" class="btn-primary" style="padding: 1.2rem 2.5rem; border-radius: 30px; font-size: 1.1rem; display: flex; align-items: center; gap: 0.8rem; box-shadow: 0 10px 25px -5px var(--primary-glow);"><i class="fas fa-rocket"></i> Explore Tools</a>
+                    <a href="profile.html" class="btn-primary" style="background: transparent; border: 1px solid var(--primary); color: var(--primary); box-shadow: none; padding: 1.2rem 2.5rem; border-radius: 30px; font-size: 1.1rem; display: flex; align-items: center; gap: 0.8rem;"><i class="fas fa-user-astronaut"></i> View Profile</a>
+                </div>
             </div>
-        </div>
-        <div style="position: absolute; right: 2%; bottom: 5%; width: 45%; opacity: 0.9; z-index: 1;" class="animate-float">
-            <img src="images/hero.png" alt="Futuristic Study Illustration" style="width: 100%; filter: drop-shadow(0 0 30px var(--primary-glow));">
+            
+            <div style="width: 45%; max-width: 600px; position: relative; z-index: 1;" class="hero-image-container animate-soft-float">
+                <img src="images/hero.png" alt="Futuristic Study Illustration" style="width: 100%; filter: drop-shadow(0 0 50px var(--primary-glow));">
+            </div>
         </div>
     </header>
 
@@ -80,7 +118,12 @@
     </section>
 
     <footer style="padding: 6rem 6%; text-align: center; border-top: 1px solid var(--glass-border); background: var(--bg-card); backdrop-filter: blur(10px);">
-        <p style="color: var(--text-muted);">&copy; 2026 HelperHub. Designed for the students of the future.</p>
+        <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem;">
+            <a href="https://github.com/pratikgoswami1205-sys" target="_blank" style="color: var(--text-muted); font-size: 1.5rem; transition: var(--transition);" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/pratik-giri-6382153b0" target="_blank" style="color: var(--text-muted); font-size: 1.5rem; transition: var(--transition);" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p style="color: var(--text-main); font-weight: 600; margin-bottom: 0.5rem;">Developed with <i class="fas fa-heart" style="color: #ff4757;"></i> by Pratik Giri</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 HelperHub. Designed for the students of the future.</p>
     </footer>
 
     <script src="js/script.js"></script>

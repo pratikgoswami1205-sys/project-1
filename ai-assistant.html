@@ -7,7 +7,30 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="dark js-active dark">
+    <script>
+        // Emergency visibility restoration
+        (function() {
+            const restore = () => {
+                const loader = document.querySelector('.loader-wrapper');
+                if (loader) {
+                    loader.style.setProperty('display', 'none', 'important');
+                }
+                document.body.classList.remove('page-entering');
+                document.body.style.opacity = '1';
+                document.body.style.visibility = 'visible';
+                
+                // Reveal all elements if observer failed
+                document.querySelectorAll('.modern-card, .section-header, .hero-content, .grid-layout > div, .skill-card').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                    el.classList.add('animate-fade');
+                });
+            };
+            setTimeout(restore, 3000);
+            window.addEventListener('load', () => setTimeout(restore, 1000));
+        })();
+    </script>
     <!-- Loading Screen -->
     <div class="loader-wrapper">
         <i class="fas fa-graduation-cap loader-logo"></i>
@@ -23,8 +46,7 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="tools.html">Tools</a></li>
-            <li><a href="ai-tools.html" class="active">AI Tools</a></li>
-            <li><a href="notes.html">Notes</a></li>
+            <li><a href="notes.html">Study Notes</a></li>
             <li><a href="papers.html">Previous Papers</a></li>
             <li><a href="planner.html">Study Planner</a></li>
             <li><a href="profile.html">Profile</a></li>
@@ -58,6 +80,12 @@
                 </div>
             </div>
 
+            <div class="chat-suggestions" style="display: flex; gap: 0.8rem; padding: 1rem 1.5rem; overflow-x: auto; scrollbar-width: none;">
+                <button class="glass-btn" style="white-space: nowrap; font-size: 0.85rem; padding: 0.6rem 1rem;" onclick="useSuggestion('Summarize my notes')"><i class="fas fa-magic"></i> Summarize my notes</button>
+                <button class="glass-btn" style="white-space: nowrap; font-size: 0.85rem; padding: 0.6rem 1rem;" onclick="useSuggestion('Explain quantum physics')"><i class="fas fa-atom"></i> Explain quantum physics</button>
+                <button class="glass-btn" style="white-space: nowrap; font-size: 0.85rem; padding: 0.6rem 1rem;" onclick="useSuggestion('Write an essay intro')"><i class="fas fa-pen-nib"></i> Write an essay intro</button>
+                <button class="glass-btn" style="white-space: nowrap; font-size: 0.85rem; padding: 0.6rem 1rem;" onclick="useSuggestion('Quiz me on Biology')"><i class="fas fa-dna"></i> Quiz me on Biology</button>
+            </div>
             <div class="chat-input-area">
                 <input type="text" id="chat-input" class="chat-input" placeholder="Ask any study question..." onkeypress="handleEncryptEnter(event)">
                 <button onclick="sendMessage()" class="chat-send-btn">

@@ -1,10 +1,25 @@
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let tasks = JSON.parse(localStorage.getItem('planner_tasks')) || [];
+let currentCategory = 'daily';
+
+window.setPlannerTab = function(category) {
+    currentCategory = category;
+    
+    // Update active tab UI
+    document.getElementById('tab-daily').classList.remove('active');
+    document.getElementById('tab-weekly').classList.remove('active');
+    document.getElementById('tab-' + category).classList.add('active');
+    
+    // Update text
+    document.getElementById('progress-tab-text').innerText = category === 'daily' ? 'Daily Productivity Index' : 'Weekly Productivity Index';
+    
+    render();
+};
 
 window.addTask = function() {
     const input = document.getElementById('task-input');
     const text = input.value.trim();
     if (text) {
-        tasks.push({ text, completed: false, id: Date.now() });
+        tasks.push({ text, completed: false, category: currentCategory, id: Date.now() });
         input.value = '';
         save();
         render();
@@ -24,21 +39,23 @@ window.deleteTask = function(id) {
 };
 
 function save() { 
-    localStorage.setItem('tasks', JSON.stringify(tasks)); 
+    localStorage.setItem('planner_tasks', JSON.stringify(tasks)); 
 }
 
 function render() {
     const list = document.getElementById('tasks-list');
     if (!list) return;
 
-    if (tasks.length === 0) {
-        list.innerHTML = `<div style="text-align: center; padding: 3rem; color: var(--text-muted); font-style: italic;">No milestones added yet. Start planning your success!</div>`;
+    const filteredTasks = tasks.filter(t => (t.category || 'daily') === currentCategory);
+
+    if (filteredTasks.length === 0) {
+        list.innerHTML = `<div style="text-align: center; padding: 3rem; color: var(--text-muted); font-style: italic;">No milestones added for this planner yet. Start planning your success!</div>`;
         updateProgress(0);
         return;
     }
 
     list.innerHTML = '';
-    tasks.forEach(t => {
+    filteredTasks.forEach(t => {
         const item = document.createElement('div');
         item.className = 'glass';
         item.style.cssText = `padding: 1.5rem; border-radius: 20px; display: flex; align-items: center; gap: 1.2rem; transition: var(--transition); border-color: ${t.completed ? 'transparent' : 'var(--glass-border)'}; opacity: ${t.completed ? 0.6 : 1}; transform: ${t.completed ? 'scale(0.98)' : 'scale(1)'}`;
@@ -60,8 +77,8 @@ function render() {
         list.appendChild(item);
     });
     
-    const completed = tasks.filter(t => t.completed).length;
-    const percent = tasks.length > 0 ? Math.round((completed / tasks.length) * 100) : 0;
+    const completed = filteredTasks.filter(t => t.completed).length;
+    const percent = filteredTasks.length > 0 ? Math.round((completed / filteredTasks.length) * 100) : 0;
     updateProgress(percent);
 }
 

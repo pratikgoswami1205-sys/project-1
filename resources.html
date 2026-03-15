@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Previous Papers | HelperHub</title>
+    <title>Resources Hub | HelperHub</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -47,7 +47,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="tools.html">Tools</a></li>
             <li><a href="notes.html">Study Notes</a></li>
-            <li><a href="papers.html" class="active">Previous Papers</a></li>
+            <li><a href="papers.html">Previous Papers</a></li>
             <li><a href="planner.html">Study Planner</a></li>
             <li><a href="profile.html">Profile</a></li>
             <li><a href="contact.html">Contact</a></li>
@@ -59,45 +59,58 @@
 
     <section style="padding: 10rem 6% 5rem;">
         <div class="section-header">
-            <h2>Previous Year Papers</h2>
-            <p style="color: var(--text-muted); font-size: 1.1rem;">Practice makes perfect. Access archives of past examinations.</p>
+            <h2>Resources Hub</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Curated programming platforms, developer tools, and study resources.</p>
         </div>
 
         <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 4rem; flex-wrap: wrap;">
-            <button class="glass-tab active" onclick="filterResources('all')">All Years</button>
-            <button class="glass-tab" onclick="filterResources('2025')">2025</button>
-            <button class="glass-tab" onclick="filterResources('2024')">2024</button>
-            <button class="glass-tab" onclick="filterResources('2023')">2023</button>
-            <button class="glass-tab" onclick="filterResources('2022')">2022</button>
+            <button class="glass-tab active" onclick="filterResources('all')">All</button>
+            <button class="glass-tab" onclick="filterResources('learning')">Learning</button>
+            <button class="glass-tab" onclick="filterResources('tools')">Dev Tools</button>
+            <button class="glass-tab" onclick="filterResources('study')">Study</button>
         </div>
 
         <div class="grid-layout" id="resources-grid">
-            <div class="modern-card" data-category="2025">
-                <div class="modern-card-icon"><i class="fas fa-file-pdf"></i></div>
-                <h3>Computer Networks 2025</h3>
-                <p>End-semester examination paper with detailed solutions and marking schemes.</p>
-                <button class="btn-primary" style="margin-top: 2rem; width: 100%;" onclick="alert('Downloading Paper 2025...')">Download Archive</button>
+            <div class="modern-card" data-category="learning">
+                <div class="modern-card-icon"><i class="fab fa-free-code-camp"></i></div>
+                <h3>freeCodeCamp</h3>
+                <p>Free comprehensive curriculum for full-stack web development and data structures.</p>
+                <a href="https://www.freecodecamp.org/" target="_blank" class="content-link" style="display: inline-block; margin-top: 1rem;">Visit Platform <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <div class="modern-card" data-category="2024">
-                <div class="modern-card-icon"><i class="fas fa-file-pdf"></i></div>
-                <h3>Operating Systems 2024</h3>
-                <p>Comprehensive collection of Mid-term and End-term question banks.</p>
-                <button class="btn-primary" style="margin-top: 2rem; width: 100%;" onclick="alert('Downloading Paper 2024...')">Download Archive</button>
+            <div class="modern-card" data-category="learning">
+                <div class="modern-card-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>LeetCode</h3>
+                <p>The best platform to practice competitive programming and prepare for interviews.</p>
+                <a href="https://leetcode.com/" target="_blank" class="content-link" style="display: inline-block; margin-top: 1rem;">Visit Platform <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <div class="modern-card" data-category="2023">
-                <div class="modern-card-icon"><i class="fas fa-file-pdf"></i></div>
-                <h3>Software Engineering 2023</h3>
-                <p>Includes previous year projects, case studies, and unit test question papers.</p>
-                <button class="btn-primary" style="margin-top: 2rem; width: 100%;" onclick="alert('Downloading Paper 2023...')">Download Archive</button>
+            <div class="modern-card" data-category="tools">
+                <div class="modern-card-icon"><i class="fab fa-github"></i></div>
+                <h3>GitHub Student Pack</h3>
+                <p>Learn to ship software like a pro. Free access to premium developer tools for students.</p>
+                <a href="https://education.github.com/pack" target="_blank" class="content-link" style="display: inline-block; margin-top: 1rem;">Get Student Pack <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <div class="modern-card" data-category="2022">
-                <div class="modern-card-icon"><i class="fas fa-file-pdf"></i></div>
-                <h3>Discrete Math 2022</h3>
-                <p>Highly requested paper featuring step-by-step proofs and detailed diagrams.</p>
-                <button class="btn-primary" style="margin-top: 2rem; width: 100%;" onclick="alert('Downloading Paper 2022...')">Download Archive</button>
+            <div class="modern-card" data-category="tools">
+                <div class="modern-card-icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>Figma</h3>
+                <p>Collaborative interface design tool. Free for students to design premium UIs.</p>
+                <a href="https://www.figma.com/education/" target="_blank" class="content-link" style="display: inline-block; margin-top: 1rem;">Get Figma <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="modern-card" data-category="study">
+                <div class="modern-card-icon"><i class="fas fa-book-open"></i></div>
+                <h3>MDN Web Docs</h3>
+                <p>The ultimate resource for HTML, CSS, and JavaScript documentation by Mozilla.</p>
+                <a href="https://developer.mozilla.org/" target="_blank" class="content-link" style="display: inline-block; margin-top: 1rem;">Read Docs <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="modern-card" data-category="study">
+                <div class="modern-card-icon"><i class="fas fa-brain"></i></div>
+                <h3>Notion for Education</h3>
+                <p>The all-in-one workspace for your notes, tasks, wikis, and databases. Free for students.</p>
+                <a href="https://www.notion.so/students" target="_blank" class="content-link" style="display: inline-block; margin-top: 1rem;">Get Notion <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </section>

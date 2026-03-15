@@ -8,7 +8,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+<body class="dark js-active dark">
+    <script>
+        // Emergency visibility restoration
+        (function() {
+            const restore = () => {
+                const loader = document.querySelector('.loader-wrapper');
+                if (loader) {
+                    loader.style.setProperty('display', 'none', 'important');
+                }
+                document.body.classList.remove('page-entering');
+                document.body.style.opacity = '1';
+                document.body.style.visibility = 'visible';
+                
+                // Reveal all elements if observer failed
+                document.querySelectorAll('.modern-card, .section-header, .hero-content, .grid-layout > div, .skill-card').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                    el.classList.add('animate-fade');
+                });
+            };
+            setTimeout(restore, 3000);
+            window.addEventListener('load', () => setTimeout(restore, 1000));
+        })();
+    </script>
     <!-- Loading Screen -->
     <div class="loader-wrapper">
         <i class="fas fa-graduation-cap loader-logo"></i>
@@ -23,9 +46,8 @@
         </div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="tools.html" class="active">Tools</a></li>
-            <li><a href="ai-tools.html">AI Tools</a></li>
-            <li><a href="notes.html">Notes</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="notes.html">Study Notes</a></li>
             <li><a href="papers.html">Previous Papers</a></li>
             <li><a href="planner.html">Study Planner</a></li>
             <li><a href="profile.html">Profile</a></li>

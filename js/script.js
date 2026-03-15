@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('js-active');
     document.body.classList.add('page-entering'); // Apply entering 3D transition
     initTheme();
     initNavbar();
@@ -9,19 +10,38 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initPageTransitions();
     initProfileTyping();
+    initLoader();
+    
+    // Content Safety Reveal Fallback
+    setTimeout(() => {
+        document.querySelectorAll('.modern-card, .section-header, .hero-content, .grid-layout > div, .skill-card').forEach(el => {
+            if (getComputedStyle(el).opacity === '0' || el.style.opacity === '0') {
+                el.classList.add('animate-fade');
+                el.style.opacity = '';
+                el.style.transform = '';
+            }
+        });
+    }, 5000); // Reveal after 5s no matter what
 });
 
-window.addEventListener('load', () => {
+function initLoader() {
     const loader = document.querySelector('.loader-wrapper');
     if (loader) {
-        setTimeout(() => {
+        // Fallback: forcefully hide after 3 seconds
+        const hideLoader = () => {
             loader.classList.add('fade-out');
+            document.body.classList.remove('page-entering');
+            // Immediate removal after animation starts
             setTimeout(() => {
-                document.body.classList.remove('page-entering');
-            }, 600);
-        }, 1500); // Shorter loader duration before transition
+                loader.style.setProperty('display', 'none', 'important');
+                loader.style.pointerEvents = 'none';
+            }, 800);
+        };
+
+        window.addEventListener('load', hideLoader);
+        setTimeout(hideLoader, 3000); // Max wait 3 seconds
     }
-});
+}
 
 function initPageTransitions() {
     const links = document.querySelectorAll('a[href]');
@@ -49,9 +69,9 @@ function initCustomCursor() {
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const cursor = document.createElement('div');
-    cursor.className = 'custom-cursor';
+    cursor.className = 'cursor-glow';
     const cursorTrail = document.createElement('div');
-    cursorTrail.className = 'custom-cursor-trail';
+    cursorTrail.className = 'cursor-trail';
     document.body.appendChild(cursor);
     document.body.appendChild(cursorTrail);
 
@@ -254,27 +274,25 @@ function initScrollAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-fade');
+                // Force clear inline styles to ensure visibility
+                entry.target.style.opacity = '';
+                entry.target.style.transform = '';
                 observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.modern-card, .section-header, .hero-content, .grid-layout > div, .skill-card').forEach(el => {
-        el.style.opacity = '0';
+        // Just observe, let CSS handle initial state for better reliability
         observer.observe(el);
     });
 }
 
-// Profile Typing Animation
-function initProfileTyping() {
-    const typingText = document.getElementById('typing-text');
+// Typing Animation for Hero and Profile
+function initTypingEffect(elementId, phrases) {
+    const typingText = document.getElementById(elementId);
     if (!typingText) return;
 
-    const phrases = [
-        "Building Smart Tools for Students",
-        "Exploring Web Technologies",
-        "Passionate About Data and Development"
-    ];
     let phraseIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -306,8 +324,8 @@ function initProfileTyping() {
     }
 
     // Start typing style for cursor
-    const cursor = document.querySelector('.typing-cursor');
-    if (cursor) {
+    const cursor = typingText.nextElementSibling;
+    if (cursor && cursor.classList.contains('typing-cursor')) {
         setInterval(() => {
             cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
         }, 500);
@@ -315,3 +333,56 @@ function initProfileTyping() {
 
     setTimeout(type, 1000); // Initial delay
 }
+
+function initProfileTyping() {
+    initTypingEffect('typing-text', [
+        "Building Smart Tools for Students",
+        "Exploring Web Technologies",
+        "Passionate About Data and Development"
+    ]);
+
+    initTypingEffect('hero-typing-text', [
+        "Building Smart Tools for Students",
+        "Exploring Web Technologies",
+        "Creating Digital Platforms"
+    ]);
+}
+
+// Counter Animation Logic
+function initCounters() {
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+
+    const startCount = (target) => {
+        const updateCount = () => {
+            const current = +target.innerText;
+            const goal = +target.getAttribute('data-target');
+            const inc = goal / speed;
+
+            if (current < goal) {
+                target.innerText = Math.ceil(current + inc);
+                setTimeout(updateCount, 10);
+            } else {
+                target.innerText = goal + '+';
+            }
+        };
+        updateCount();
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                startCount(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => observer.observe(counter));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('.counter')) {
+        initCounters();
+    }
+});
